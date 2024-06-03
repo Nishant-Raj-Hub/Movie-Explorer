@@ -1,16 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import MovieList from '../components/MovieList';
 
 const Home = () => {
   const [query, setQuery] = useState('');
   const [movies, setMovies] = useState([]);
+  const [tempMovies, setTempMovies] = useState([]);
 
   const searchMovies = async (e) => {
     e.preventDefault();
     const response = await axios.get(`http://localhost:8000/api/movies/search?query=${query}`);
     setMovies(response.data);
   };
+
+  useEffect(() => {
+    const fetchTempMovieDetails = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8000/api/movies/search?query=endgame`);
+
+        setTempMovies(response.data);
+        setLoading(false);
+      } catch (err) {
+        setError('Error fetching movie details');
+        setLoading(false);
+        console.error(err);
+      }
+    };
+    fetchTempMovieDetails();
+  }, []);
 
   return (
     <div>
@@ -23,7 +40,7 @@ const Home = () => {
         />
         <button type="submit">Search</button>
       </form>
-      <MovieList movies={movies} />
+      <MovieList movies={movies} tempMovies={tempMovies}/>
     </div>
   );
 };

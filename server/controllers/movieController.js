@@ -7,7 +7,10 @@ const searchMovies = async (req, res) => {
     const { query } = req.query;
     const response = await axios.get(`http://www.omdbapi.com/?apikey=${API_KEY}&s=${query}`);
 
-    res.json(response.data.results);
+    console.log(`http://www.omdbapi.com/?apikey=${API_KEY}&s=${query}`)
+    console.log(response.data.Search)
+
+    res.json(response.data.Search);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
