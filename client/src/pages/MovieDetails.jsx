@@ -11,7 +11,7 @@ const MovieDetails = () => {
   useEffect(() => {
     const fetchMovieDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/api/movies/${id}`);
+        const response = await axios.get(`https://movie-explorer-3mef.onrender.com/api/movies/${id}`);
         setMovie(response.data);
         setLoading(false);
       } catch (err) {

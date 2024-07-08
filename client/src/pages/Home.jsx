@@ -9,14 +9,14 @@ const Home = () => {
 
   const searchMovies = async (e) => {
     e.preventDefault();
-    const response = await axios.get(`http://localhost:8000/api/movies/search?query=${query}`);
+    const response = await axios.get(`https://movie-explorer-3mef.onrender.com/api/movies/search?query=${query}`);
     setMovies(response.data);
   };
 
   useEffect(() => {
     const fetchTempMovieDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/api/movies/search?query=endgame`);
+        const response = await axios.get(`https://movie-explorer-3mef.onrender.com/api/movies/search?query=endgame`);
 
         setTempMovies(response.data);
         setLoading(false);
